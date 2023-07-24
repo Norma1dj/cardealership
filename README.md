@@ -3,7 +3,17 @@
 Team:
 
 * Harold Sy - Services microservice
-* Person 2 - Sales microservice?
+    React Components:
+        Show a list of manufacturers
+        Create a manufacturer
+        Show a list of vehicle models
+        
+* Person 2 - Sales microservice
+    React Components:
+        Create a vehicle model
+        Show a list of automobiles in inventory
+        Create an automobile in inventory
+
 
 ## Design
 

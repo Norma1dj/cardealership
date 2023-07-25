@@ -51,7 +51,9 @@ class SaleListEncoder(ModelEncoder):
                 "first_name": o.salesperson.first_name,
                 "last_name": o.salesperson.last_name,
                 "employee_id": o.salesperson.employee_id,
-            }
+            },
+            
+            "price": float(o.price), 
         }
 
 @require_http_methods(["GET", "POST"])

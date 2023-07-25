@@ -41,6 +41,7 @@ class SaleListEncoder(ModelEncoder):
                 "last_name": o.customer.last_name,
                 "address": o.customer.address,
                 "phone_number": o.customer.phone_number,
+                "id": o.customer.id,
             },
             "automobile": {
                 "sold": o.automobile.sold,
@@ -90,6 +91,33 @@ def api_customer_list(request):
 
 @require_http_methods(["GET", "POST"])
 def api_salesperson_list(request):
+    #GET list of all the sales people or error message
+    if request.method == "GET":
+        try: 
+            salespeople = Salesperson.objects.all()
+            return JsonResponse(
+                {"salespeople":salespeople},
+                encoder=SalespersonListEncoder
+            )
+        except:
+            response = JsonResponse({"message": "Error retreiving list of sales persons"})
+            response.status_code = 400
+            return response
+    #GET list of all the sales people or error message
+
+    else:
+        try:
+            content = json.loads(request.body)
+            salesperson = Salesperson.objects.create(**content)
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonListEncoder,
+                safe=False
+            )
+        except:
+            response = JsonResponse({"message":"Could not create a Salesperson"})
+            response.status_code = 400
+            return response
     
 
 
@@ -115,8 +143,11 @@ def api_sale_list(request, pk=None):
         content = json.loads(request.body)
         
         try:
-        # automobile_vin = content["automobile"]
+        
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            automobile.sold = True
+            automobile.save()
+
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             response = JsonResponse({"message": "invalid vin"})

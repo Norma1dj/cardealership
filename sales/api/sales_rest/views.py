@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from common.json import ModelEncoder
-from .models import Salesperson, Customer, Sale
+from .models import Salesperson, Customer, Sale, AutomobileVO
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 
@@ -10,6 +13,7 @@ class SalespersonListEncoder(ModelEncoder):
         'first_name',
         'last_name',
         'employee_id',
+        'id'
     ]
 
 class CustomerListEncoder(ModelEncoder):
@@ -19,12 +23,14 @@ class CustomerListEncoder(ModelEncoder):
         'last_name',
         'address',
         'phone_number',
+        'id'
     ]
 
 class SaleListEncoder(ModelEncoder):
     model = Sale
     properties = [
         'price',
+        'id'
     ]
 
 
@@ -46,3 +52,94 @@ class SaleListEncoder(ModelEncoder):
                 "employee_id": o.salesperson.employee_id,
             }
         }
+
+@require_http_methods(["GET", "POST"])
+def api_customer_list(request):
+
+    #GET list of all the customers
+    if request.method == "GET":
+        try:
+            customers = Customer.objects.all()
+            return JsonResponse(
+                {"customers": customers},
+                encoder=CustomerListEncoder
+            )
+        except:
+            response = JsonResponse({"message":"Could not list customers"})
+            response.status_code = 400
+            return response
+    #Get list of all the customers
+
+    else:
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)
+            return JsonResponse(
+                customer,
+                encoder=CustomerListEncoder,
+                safe=False
+            )
+        except:
+            response = JsonResponse({"message":"Could not create a customer"})
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_sale_list(request, pk=None):
+
+    # GET method for getting list of sales or individual sale
+    if request.method == "GET":
+        if pk == None:
+            sales = Sale.objects.all()
+        else:
+            sales = Sale.objects.filter(id=pk)
+        return JsonResponse(
+            {"sales": sales},
+            encoder=SaleListEncoder,
+            safe=False,
+        )
+    # GET method for getting list of sales or individual sale
+
+
+    # POST Method to create a sale
+    else:
+        content = json.loads(request.body)
+        
+        try:
+        # automobile_vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
+            response = JsonResponse({"message": "invalid vin"})
+            response.status_code = 400
+
+
+        try:
+            salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
+            content["salesperson"] = salesperson
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "invalid salesperson"})
+            response.status_code = 400
+        
+        try:
+            customer = Customer.objects.get(id=content["customer"])
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            response = JsonResponse({"message": "invalid customer"})
+            response.status_code = 400
+            return response
+
+        try:
+        
+            sale = Sale.objects.create(**content)
+
+            return JsonResponse(
+                sale,
+                encoder=SaleListEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"Message": "Unable to create the sale"})
+            response.status_code = 400
+            return response

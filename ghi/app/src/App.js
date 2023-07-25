@@ -4,7 +4,7 @@ import Nav from './Nav';
 import CreateModelForm from './CreateModelForm';
 import AutomobilesList from './AutomobilesList';
 import CreateAutomobileForm from './CreateAutomobileForm';
-import AddSalespersonForm from './AddSalespersonForm';
+import AddSalesPersonForm from './AddSalesPersonForm';
 import AddCustomerForm from './AddCustomerForm';
 import RecordSaleForm from './RecordSaleForm';
 import AllSalesList from './AllSalesList';
@@ -19,7 +19,7 @@ function App() {
           <Route path="/models/create" element={<CreateModelForm />} />
           <Route path="/automobiles" element={<AutomobilesList />} />
           <Route path="/automobiles/create" element={<CreateAutomobileForm />} />
-          <Route path="/salespeople/create" element={<AddSalespersonForm />} />
+          <Route path="/salespeople/create" element={<AddSalesPersonForm />} />
           <Route path="/customers/create" element={<AddCustomerForm />} />
           <Route path="/sales/create" element={<RecordSaleForm />} />
           <Route path="/sales" element={<AllSalesList />} />

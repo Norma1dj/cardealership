@@ -3,8 +3,8 @@ import React from 'react';
 function CreateModelForm() {
   return (
     <div>
-      {/* Add your CreateModel content here */}
-      <h1>Create Model</h1>
+      {/* Add your Create Model Form content here */}
+      <h1>Create Model Form</h1>
     </div>
   );
 }

@@ -11,22 +11,25 @@ django.setup()
 
 # Import models from service_rest, here. Ignore vs-code error hinting
 # from service_rest.models import Something
+from service_rest.models import AutomobileVO
 
+
+def get_vin():
+    response=request.get("http://inventory-api:8000/api/automobiles/")# <=======  # not sure about string!!!
+    content=json.loads(response.content)
+    for vin in content["vin"]:
+        AutomobileVO.objects.update_or_create(
+            import_href=vin["href"],
+            defaults={"name": vin["vin"]}),# <====================================   # missing string!!!!
+        )
 
 def poll(repeat=True):
     while True:
-        print('Service poller polling for data')
+        print('Automobile poller polling for data')
         try:
-            # Write your polling logic, here
-            # Do not copy entire file
-            pass
-        
+            get_vin()
         except Exception as e:
             print(e, file=sys.stderr)
-
-        if (not repeat):
-            break
-
         time.sleep(60)
 
 

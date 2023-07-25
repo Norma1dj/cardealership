@@ -18,11 +18,12 @@ def get_automobile():
     try:
         response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
         content = json.loads(response.content)
-        for automobile in content["automobiles"]:
+        for automobile in content["autos"]:
             AutomobileVO.objects.update_or_create(
                 vin=automobile["vin"],
                 defaults={
-                    "vin": automobile["vin"]
+                    "vin": automobile["vin"],
+                    "sold": automobile["sold"],
                 }
             )
 
@@ -44,7 +45,7 @@ def poll(repeat=True):
         if (not repeat):
             break
 
-        time.sleep(60)
+        time.sleep(1)
 
 
 if __name__ == "__main__":

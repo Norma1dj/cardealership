@@ -143,8 +143,11 @@ def api_sale_list(request, pk=None):
         content = json.loads(request.body)
         
         try:
-        # automobile_vin = content["automobile"]
+        
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            automobile.sold = True
+            automobile.save()
+
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             response = JsonResponse({"message": "invalid vin"})

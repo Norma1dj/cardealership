@@ -70,6 +70,7 @@ def api_customer_list(request):
             return response
     #Get list of all the customers
 
+    #POST Create a customer or error message
     else:
         try:
             content = json.loads(request.body)
@@ -83,6 +84,13 @@ def api_customer_list(request):
             response = JsonResponse({"message":"Could not create a customer"})
             response.status_code = 400
             return response
+    #POST Create a customer or error message
+
+
+
+@require_http_methods(["GET", "POST"])
+def api_salesperson_list(request):
+    
 
 
 @require_http_methods(["GET", "POST"])

@@ -7,7 +7,7 @@ import json
 
 
 class TechnicianEncoder(ModelEncoder):
-    tech_model=Technician
+    model=Technician
     properties = [
         "first_name",
         "last_name",
@@ -16,7 +16,7 @@ class TechnicianEncoder(ModelEncoder):
 
 
 class AppointmentEncoder(ModelEncoder):
-    app_model=Appointment
+    model=Appointment
     properties = [
         "date_time",
         "reason",
@@ -26,19 +26,28 @@ class AppointmentEncoder(ModelEncoder):
         "technician",
     ]
 
+class AutomobileVOEncoder(ModelEncoder):
+    model=AutomobileVO
+    properties = [
+        "vin",
+        "sold",
+    ]
 
+
+# ================================================================================================
 
 @require_http_methods(["GET","POST","DELETE"])
 def list_technicians(request):
     # GET ====================================
-    if request=="GET":
+    if request.method =="GET":
         techs=Technician.objects.all()
         return JsonResponse(
             {"techs":techs},
             encoder=TechnicianEncoder,
         )
     # POST ===================================
-    elif request=="POST":
+    elif request.method =="POST":
+        print("I AM HERE!!!") 
         content=json.loads(request.body)
         try:
             employee_id=AutomobileVO.objects.get(import_href=content["employee_id"])
@@ -50,30 +59,31 @@ def list_technicians(request):
                 safe=False,
             )
     # DELETE ==================================
-    elif request=="DELETE":
+    elif request.method =="DELETE":
         count,_=Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted":count>0})
+
 
 # ================================================================================================
 
 @require_http_methods(["GET", "POST", "DELETE", "PUT"])
 def list_appointments(request):
     # GET =============================================
-    if request=="GET":
+    if request.method =="GET":
         app=Appointment.objects.all()
         return JsonResponse(
-            {"app":app}
+            {"app":app},
             encoder=AppointmentEncoder,
         )
     # POST ============================================
-    elif request=="POST":
+    elif request.method =="POST":
         content=json.loads(request.body)
         try:
             vin=AutomobileVO.objects.get(import_href=content["vin"])
             content["vin"]=vin
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"messge": "Invalid vin number"}
+                {"messge": "Invalid vin number error 400"}
             )
         app=Appointment.objects.create(**content)
         return JsonResponse(
@@ -82,17 +92,17 @@ def list_appointments(request):
             safe=False
         )
     # DELETE ===========================================
-    elif request=="DELETE":
+    elif request.method =="DELETE":
         count,_=Appointment.objects.filter(id=id).delete()
         return JsonResponse({"deleted":count>0})
     # PUT ==============================================
-    elif request=="PUT":
+    elif request.method =="PUT":
         try:
             if "vin" in content:
                 vin=Appointment.objects.get(import_href=content["vin"])
                 content["vin"]=vin
         except Appointment.DoesNotExist:
-            return JsonResponse({"message:":"Invalid vin number"})
+            return JsonResponse({"message:":"Invalid vin number error 400"})
         Appointment.objects.filter(id=id.update(**content))
         return JsonResponse(
             vin,
@@ -101,3 +111,14 @@ def list_appointments(request):
         )        
 
 
+# ================================================================================================
+
+@require_http_methods(["GET"])
+def list_automobiles(request):
+    if request.method=="GET":
+        car=AutomobileVO.objects.all()
+        return JsonResponse(
+            {"car":car},
+            encoder=AutomobileVOEncoder,
+        )
+  

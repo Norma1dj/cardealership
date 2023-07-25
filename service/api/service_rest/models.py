@@ -30,7 +30,7 @@ class Appointment(models.Model):
     customer=models.CharField(max_length=200)
     technician=models.ForeignKey(
         Technician,
-        related_name="appointment"
+        related_name="appointment",
         on_delete=models.CASCADE,
     )
 

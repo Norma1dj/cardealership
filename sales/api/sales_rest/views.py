@@ -52,12 +52,12 @@ class SaleListEncoder(ModelEncoder):
                 "last_name": o.salesperson.last_name,
                 "employee_id": o.salesperson.employee_id,
             },
-            
-            "price": float(o.price), 
+
+            "price": str(o.price), 
         }
 
-@require_http_methods(["GET", "POST"])
-def api_customer_list(request):
+@require_http_methods(["GET", "POST", "DELETE"])
+def api_customer_list(request, pk=None):
 
     #GET list of all the customers
     if request.method == "GET":
@@ -72,6 +72,22 @@ def api_customer_list(request):
             response.status_code = 400
             return response
     #Get list of all the customers
+
+    #DELETE a singe customer
+    elif request.method == "DELETE":
+            try:
+                customer = Customer.objects.get(id=pk)
+                customer.delete()
+                return JsonResponse({"message": "Customer deleted"})
+            except Customer.DoesNotExist:
+                response = JsonResponse({"message": "Customer does not exist."})
+                response.status_code = 404
+                return response
+            except Exception as e:
+                response = JsonResponse({"message": "Could not delete customer."})
+                response.status_code = 400
+                return response
+    #DELETE a singe customer        
 
     #POST Create a customer or error message
     else:

@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import CreateModelForm from './CreateModelForm';
+import AutomobilesList from './AutomobilesList';
+import CreateAutomobileForm from './CreateAutomobileForm';
+import AddSalespersonForm from './AddSalespersonForm';
+import AddCustomerForm from './AddCustomerForm';
+import RecordSaleForm from './RecordSaleForm';
+import AllSalesList from './AllSalesList';
 
 function App() {
   return (
@@ -9,6 +16,13 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/models/create" element={<CreateModelForm />} />
+          <Route path="/automobiles" element={<AutomobilesList />} />
+          <Route path="/automobiles/create" element={<CreateAutomobileForm />} />
+          <Route path="/salespeople/create" element={<AddSalespersonForm />} />
+          <Route path="/customers/create" element={<AddCustomerForm />} />
+          <Route path="/sales/create" element={<RecordSaleForm />} />
+          <Route path="/sales" element={<AllSalesList />} />
         </Routes>
       </div>
     </BrowserRouter>

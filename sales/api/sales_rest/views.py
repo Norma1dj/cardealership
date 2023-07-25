@@ -73,7 +73,7 @@ def api_customer_list(request, pk=None):
             return response
     #Get list of all the customers
 
-    #DELETE a singe customer
+    #DELETE a single customer
     elif request.method == "DELETE":
             try:
                 customer = Customer.objects.get(id=pk)
@@ -107,8 +107,8 @@ def api_customer_list(request, pk=None):
 
 
 
-@require_http_methods(["GET", "POST"])
-def api_salesperson_list(request):
+@require_http_methods(["GET", "POST", "DELETE"])
+def api_salesperson_list(request, pk=None):
     #GET list of all the sales people or error message
     if request.method == "GET":
         try: 
@@ -122,6 +122,24 @@ def api_salesperson_list(request):
             response.status_code = 400
             return response
     #GET list of all the sales people or error message
+
+
+    #DELETE a single salesperson
+    elif request.method == "DELETE":
+        try:
+            salesperson = Salesperson.objects.get(id=pk)
+            salesperson.delete()
+            return JsonResponse({"message": "Salesperson deleted"})
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "Salesperson not found."})
+            response.status_code = 404
+            return response
+        except Exception as e:
+            response = JsonResponse({"message": "Could not deletesalesperson."})
+            response.status_code = 400
+            return response
+    #DELETE a single salesperson
+
 
     else:
         try:
@@ -139,7 +157,7 @@ def api_salesperson_list(request):
     
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET", "POST", "DELETE"])
 def api_sale_list(request, pk=None):
 
     # GET method for getting list of sales or individual sale
@@ -155,6 +173,21 @@ def api_sale_list(request, pk=None):
         )
     # GET method for getting list of sales or individual sale
 
+    # DELETE a single sale
+    elif request.method == "DELETE":
+            try:
+                sale = Sale.objects.get(id=pk)
+                sale.delete()
+                return JsonResponse({"message": "Sale deleted"})
+            except Sale.DoesNotExist:
+                response = JsonResponse({"message": "Sale doesnt exist"})
+                response.status_code = 404
+                return response
+            except Exception as e:
+                response = JsonResponse({"message": "Could not delete this sale"})
+                response.status_code = 400
+                return response
+    # DELETE a single sale
 
     # POST Method to create a sale
     else:

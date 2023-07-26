@@ -48,16 +48,18 @@ def list_technicians(request):
     # POST ===================================
     elif request.method =="POST":
         print("I AM HERE!!!") 
-        content=json.loads(request.body)
         try:
-            employee_id=AutomobileVO.objects.get(import_href=content["employee_id"])
-            content["employee_id"]=employee_id
-        except AutomobileVO.DoesNotExist:
+            content=json.loads(request.body)
+            tech=Technician.objects.create(**content)
             return JsonResponse(
-                employee_id,
-                encoder=TechnicianEncoder,
-                safe=False,
+                tech,
+                encoder = TechnicianEncoder,
+                safe=False
             )
+        except:
+            response=JsonResponse({"message":"could not create technician"})
+            response.status_code=400
+            return response
     # DELETE ==================================
     elif request.method =="DELETE":
         count,_=Technician.objects.filter(id=id).delete()
@@ -77,8 +79,9 @@ def list_appointments(request):
         )
     # POST ============================================
     elif request.method =="POST":
-        content=json.loads(request.body)
         try:
+            content=json.loads(request.body)
+
             vin=AutomobileVO.objects.get(import_href=content["vin"])
             content["vin"]=vin
         except AutomobileVO.DoesNotExist:

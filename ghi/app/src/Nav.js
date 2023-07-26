@@ -41,6 +41,10 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/salespeople/create">Add Salesperson</NavLink>
             </li>
+            
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/customers/">Customer List</NavLink>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/customers/create">Add Customer</NavLink>
             </li>
@@ -49,6 +53,9 @@ function Nav() {
               </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/sales">All Sales </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/salespeople">List Sales People </NavLink>
             </li>
             {/* Drew's Navigation Links */}
 

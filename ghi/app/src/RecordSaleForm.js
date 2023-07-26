@@ -56,6 +56,23 @@ function RecordSaleForm() {
         'Content-Type': 'application/json',
       },
     };
+
+    const updateUrl = `http://localhost:8100/api/automobiles/${automobile}/`;
+    const updateConfig = {
+      method: "put",
+      body: JSON.stringify({ sold: true }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const updateResponse = await fetch(updateUrl, updateConfig);
+    if (updateResponse.ok) {
+      const updatedAutomobile = await updateResponse.json();
+      console.log("Automobile updated:", updatedAutomobile);
+    } else {
+      console.error("Failed to updatesold status.");
+    }
   
     const response = await fetch(salesUrl, fetchConfig);
     if (response.ok) {
@@ -67,6 +84,8 @@ function RecordSaleForm() {
     setCustomer('');
     setSalesperson('');
     setPrice('');
+    fetchData();
+    
 
         
     }

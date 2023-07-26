@@ -17,11 +17,6 @@ function CreateModelForm() {
       setPicture(value);
     };
     
-    const handleManufacturersChange = (event) => {
-      const value = event.target.value;
-      setManufacturers(value);
-    };
-
     const handleManufacturerChange = (event) => {
       const value = event.target.value;
       setManufacturer(value);

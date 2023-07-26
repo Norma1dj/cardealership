@@ -100,11 +100,7 @@ function CreateModelForm() {
                                       name="picture_url" className="form-control"/>
                                   <label htmlFor="picture_url">Picture url</label>
                               </div>
-                              {/* <div className="form-floating mb-3">
-                                  <input onChange={handleManufacturerChange} value={manufacturer} placeholder="manufacturer" required type="text" id="manufacturer"
-                                      name="manufacturer" className="form-control"/>
-                                  <label htmlFor="manufacturer">manufa</label>
-                              </div> */}
+                          
                               <div className="mb-3">
                                 <select onChange={handleManufacturerChange} required value={manufacturer_id} id="manufacturer_id" name="manufacturer_id" className="form-select">
                                     <option value="">Choose a manufacturer</option>

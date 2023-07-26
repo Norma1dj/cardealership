@@ -39,14 +39,17 @@ class AutomobileVOEncoder(ModelEncoder):
 @require_http_methods(["GET","POST","DELETE"])
 def list_technicians(request):
     # GET ====================================
-    if request.method =="GET":
+    #     Note: Code to get and list all of the
+    #           technicians.
+    if request.method == "GET":
         techs=Technician.objects.all()
         return JsonResponse(
             {"techs":techs},
             encoder=TechnicianEncoder,
         )
     # POST ===================================
-    elif request.method =="POST":
+    #      Note: Code to add a new technician.
+    elif request.method == "POST":
         print("I AM HERE!!!") 
         try:
             content=json.loads(request.body)
@@ -61,7 +64,8 @@ def list_technicians(request):
             response.status_code=400
             return response
     # DELETE ==================================
-    elif request.method =="DELETE":
+    #        Note: Code to remove a technician.
+    elif request.method == "DELETE":
         count,_=Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted":count>0})
 
@@ -71,35 +75,37 @@ def list_technicians(request):
 @require_http_methods(["GET", "POST", "DELETE", "PUT"])
 def list_appointments(request):
     # GET =============================================
-    if request.method =="GET":
-        app=Appointment.objects.all()
+    #     Note: Code to get and display a list of all
+    #           appointments
+    if request.method == "GET":
+        appoint=Appointment.objects.all()
         return JsonResponse(
-            {"app":app},
+            {"appoint":appoint},
             encoder=AppointmentEncoder,
         )
     # POST ============================================
-    elif request.method =="POST":
+    #      Note: Code to create a new appointment
+    elif request.method == "POST":
         try:
             content=json.loads(request.body)
-
-            vin=AutomobileVO.objects.get(import_href=content["vin"])
-            content["vin"]=vin
-        except AutomobileVO.DoesNotExist:
+            appoint=Appointment.objects.create(**content)
             return JsonResponse(
-                {"messge": "Invalid vin number error 400"}
+                appoint,
+                encoder = AppointmentEncoder,
+                safe=False,
             )
-        app=Appointment.objects.create(**content)
-        return JsonResponse(
-            vin,
-            encoder=AppointmentEncoder,
-            safe=False
-        )
+        except:
+            response=JsonResponse({"message":"could not create appoinment"})
+            response.status_code=400
+            return response
     # DELETE ===========================================
-    elif request.method =="DELETE":
+    #        Note: Code to delete an existing appointment.
+    elif request.method == "DELETE":
         count,_=Appointment.objects.filter(id=id).delete()
         return JsonResponse({"deleted":count>0})
     # PUT ==============================================
-    elif request.method =="PUT":
+    #     Note: Code to modify an existing appointment.
+    elif request.method == "PUT":
         try:
             if "vin" in content:
                 vin=Appointment.objects.get(import_href=content["vin"])
@@ -117,11 +123,19 @@ def list_appointments(request):
 # ================================================================================================
 
 @require_http_methods(["GET"])
-def list_automobiles(request):
-    if request.method=="GET":
-        car=AutomobileVO.objects.all()
+def list_automobiles(request, pk=None):
+    # GET ==============================================
+    #     Code: gets and lists all automobiles or a
+    #           specific car 
+    if request.method == "GET":
+        if pk == None:
+            car=AutomobileVO.objects.all()
+        else:
+            car=AutomobileVO.objects.filter(id=pk)
         return JsonResponse(
             {"car":car},
             encoder=AutomobileVOEncoder,
+            safe=False,
         )
+
   

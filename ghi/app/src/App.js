@@ -10,7 +10,7 @@ import RecordSaleForm from './RecordSaleForm';
 import AllSalesList from './AllSalesList';
 import SalesPeopleList from './SalesPeopleList';
 import CustomerList from './CustomerList';
-
+import ModelList from './ModelList';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/models/create" element={<CreateModelForm />} />
+          <Route path="/models" element={<ModelList />} />
           <Route path="/automobiles" element={<AutomobilesList />} />
           <Route path="/automobiles/create" element={<CreateAutomobileForm />} />
           <Route path="/salespeople/create" element={<AddSalesPersonForm />} />

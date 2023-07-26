@@ -56,15 +56,6 @@ function AddSalesPersonForm() {
     }
   }
 
-
-
-
-
-
-
-  
-
-
   // useEffect(()  => { 
   //   fetchData();
   // }, []);

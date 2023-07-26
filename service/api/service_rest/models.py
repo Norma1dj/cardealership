@@ -7,7 +7,7 @@ class Technician(models.Model):
     employee_id=models.CharField(max_length=50)
     
     def __str__(self):
-        return self.name
+        return self.first_name
 
 
 
@@ -17,7 +17,7 @@ class AutomobileVO(models.Model):
     sold=models.DateTimeField()
 
     def __str__(self):
-        return self.name
+        return self.vin
 
 
 
@@ -34,6 +34,6 @@ class Appointment(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.name
+    #def __str__(self):
+    #    return self.name
 

@@ -26,9 +26,19 @@ class AppointmentEncoder(ModelEncoder):
         "status",
         "vin",
         "customer",
-        "technician",
         "id"                                  # added id for django primary key
     ]
+
+    def get_extra_data(self, o):
+     return {
+         "technician": {
+             "first_name": o.technician.first_name,
+             "last_name": o.technician.last_name,
+             "employee_id": o.technician.employee_id,
+             "id": o.technician.id,
+         },
+     }
+
 
 class AutomobileVOEncoder(ModelEncoder):
     model=AutomobileVO
@@ -102,11 +112,12 @@ def list_appointments(request, pk=None):
             return JsonResponse(
                 {"appoint":appoint},
                 encoder=AppointmentEncoder,
+                safe=False,
             )
         except:
-            reponse=JsonResponse({"message": "Could not connect to the server"})
-            reponse.status_code=404
-            return reponse
+            response=JsonResponse({"message": "Could not connect to the server"})
+            response.status_code=404
+            return response
     # POST ============================================
     #      Note: Code to create a new appointment
     elif request.method == "POST":

@@ -20,6 +20,7 @@ class TechnicianEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model=Appointment
     properties = [
+        "vip"
         "date_time",
         "reason",
         "status",
@@ -53,7 +54,7 @@ def list_technicians(request, pk=None):
                 encoder=TechnicianEncoder,
             )
         except:
-            response=JsonResponse({"message":"could not connect to the server"})
+            response=JsonResponse({"message":"Could not connect to the server"})
             response.status_code=404
             return response
     # POST ===================================
@@ -68,7 +69,7 @@ def list_technicians(request, pk=None):
                 safe=False
             )
         except:
-            response=JsonResponse({"message":"could not create technician"})
+            response=JsonResponse({"message":"Could not create technician"})
             response.status_code=400
             return response
     # DELETE ==================================
@@ -77,10 +78,14 @@ def list_technicians(request, pk=None):
         try:
             tech=Technician.objects.get(id=pk)
             tech.delete()
-            return JsonResponse({"message":"techician deleted"})
-        except:
-            response=JsonResponse({"message": "technician does not exist"})
+            return JsonResponse({"message":"Techician deleted"})
+        except tech.DoesNotExist:
+            response=JsonResponse({"message": "Technician does not exist"})
             response.status_code=404
+            return response
+        except Exception as e:
+            response=JsonResponse({"message":"Could not delete this technician"})
+            response.status_code=400
             return response
 
 
@@ -99,7 +104,7 @@ def list_appointments(request, pk=None):
                 encoder=AppointmentEncoder,
             )
         except:
-            reponse=JsonResponse({"message": "could not connect to the server"})
+            reponse=JsonResponse({"message": "Could not connect to the server"})
             reponse.status_code=404
             return reponse
     # POST ============================================
@@ -114,7 +119,7 @@ def list_appointments(request, pk=None):
                 safe=False,
             )
         except:
-            response=JsonResponse({"message":"could not create appoinment"})
+            response=JsonResponse({"message":"Could not create appointment"})
             response.status_code=400
             return response
     # DELETE ===========================================
@@ -123,11 +128,11 @@ def list_appointments(request, pk=None):
         try:
             appoint=Appointment.objects.get(id=pk)
             appoint.delete()
-            return JsonResponse({"message":"appointment has been deleted"})
+            return JsonResponse({"message":"Appointment has been deleted"})
         except appoint.DoesNotExist:
-            response=JsonResponse({"message":"appointment does not exist"})
+            response=JsonResponse({"message":"Appointment does not exist"})
         except Exception as e:
-            response=JsonResponse({"message":"could not delete this appointment"})
+            response=JsonResponse({"message":"Could not delete this appointment"})
             reponse.status_code=400
             return response
     # PUT ==============================================
@@ -145,7 +150,7 @@ def list_appointments(request, pk=None):
                 safe=False,
             )
         except Appointment.DoesNotExist:
-            reponse=JsonResponse({"message":"appointment not found"})
+            reponse=JsonResponse({"message":"Appointment not found"})
             reponse.status_code=400
             return reponse
         

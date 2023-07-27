@@ -41,7 +41,7 @@ function CreateAutomobileForm() {
     data.model_id = model_id;
 
     
-    console.log(data);
+    
 
     const modelsUrl = `http://localhost:8100/api/automobiles/`;
     const fetchConfig = {
@@ -55,7 +55,7 @@ function CreateAutomobileForm() {
     const response = await fetch(modelsUrl, fetchConfig);
     if (response.ok) {
       const newModel = await response.json();
-      console.log(newModel);
+      
 
   
     setColor('');
@@ -75,7 +75,7 @@ function CreateAutomobileForm() {
     if (response.ok) {
       const data = await response.json();
       setModels(data.models);
-      console.log(data.models)
+      
       
       
     }

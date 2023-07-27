@@ -39,7 +39,7 @@ function AddCustomerForm() {
     data.phone_number = phone_number;
 
     
-    console.log(data);
+   
 
     const customerUrl = `http://localhost:8090/api/customers/`;
     const fetchConfig = {
@@ -53,7 +53,7 @@ function AddCustomerForm() {
     const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {
       const newCustomer = await response.json();
-      console.log(newCustomer);
+      
 
   
     setFirst('');

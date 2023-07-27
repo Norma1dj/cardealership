@@ -6,16 +6,16 @@
 Team:
 
 * Harold Sy -Services 
-    React Components:
-        Show a list of manufacturers
-        Create a manufacturer
-        Show a list of vehicle models
+    - React Components:
+        - Show a list of manufacturers
+        - Create a manufacturer
+        - Show a list of vehicle models
         
 * Drew Norman-Meadows -Sales 
-    React Components:
-        Create a vehicle model
-        Show a list of automobiles in inventory
-        Create an automobile in inventory
+    - React Components:
+        - Create a vehicle model
+        - Show a list of automobiles in inventory
+        - Create an automobile in inventory
 
 ## Getting Started
 
@@ -53,15 +53,29 @@ Team:
        - created a list all service appointments
        - created a list service history for a certain car
 
-    CarCar integrates 3 microservices:
-        -Sales
-        -Services
-        -Inventory
+    * CarCar integrates 3 microservices:
+        - Sales
+        - Services
+        - Inventory
 
-    Our sales and services microservices use pollers to retrieve the most up-to-date data from the inventory microservice. Sales polls every second while services polls every 60 seconds.
+    Our sales and services microservices use pollers to retrieve the most
+    up-to-date data from the inventory microservice. Sales polls every
+    second while services polls every 60 seconds.
 
     ![Img](/images/project_beta_CarCar.png)
 
+
+## Sales microservice
+
+* This service uses 4 models:
+    - Sales
+    - Customer 
+    - Salesperosn
+    - AutomobileVO
+
+* The Sales model uses data from the other 3 models to update a sales record.
+
+* The automobileVO is used by the sales poller to get updated information from the Inventory Microservice every second. This allows the sales model to get up-to-date automobile inventory vin and sold information.
 
 
 ## API Documentation
@@ -245,15 +259,3 @@ MODEL EXPLANATION AND MICROSERVICE INTEGRATION:
 
 
 
-
-## Sales microservice
-
-This service uses 4 models:
-    -Sales (Aggregate Root)
-    -Customer 
-    -Salesperosn
-    -AutomobileVO
-
-The Sales model uses data from the other 3 models to update a sales record.
-
-The automobileVO is used by the sales poller to get updated information from the Inventory Microservice every second. This allows the sales model to get up-to-date automobile inventory vin and sold information.

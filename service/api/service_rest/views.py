@@ -13,7 +13,7 @@ class TechnicianEncoder(ModelEncoder):
         "first_name",
         "last_name",
         "employee_id",
-    #    "id"                                  # added id for django primary key
+        "id"                                                 # added id for django primary key
     ]
 
 
@@ -26,17 +26,17 @@ class AppointmentEncoder(ModelEncoder):
         "status",
         "vin",
         "customer",
-        "id"                                  # added id for django primary key
+        "id"                                                 # added id for django primary key
     ]
 
     def get_extra_data(self, o):
      return {
          "technician": {
-             "first_name": o.technician.first_name,
-             "last_name": o.technician.last_name,
-             "employee_id": o.technician.employee_id,
-             "id": o.technician.id,
-         },
+            # "first_name": o.technician.first_name,
+            # "last_name": o.technician.last_name,
+            # "employee_id": o.technician.employee_id,
+             "id": o.technician.id,                          # added id for django primary key
+         }
      }
 
 
@@ -45,7 +45,7 @@ class AutomobileVOEncoder(ModelEncoder):
     properties = [
         "vin",
         "sold",
-        "id"                                  # added id for django primary key
+        "id"                                                 # added id for django primary key
     ]
 
 
@@ -131,7 +131,7 @@ def list_appointments(request, pk=None):
             )
         except:
             response=JsonResponse({"message":"Could not create appointment"})
-            response.status_code=400
+            response.status_code=400             
             return response
     # DELETE ===========================================
     #        Note: Code to delete an existing appointment.
@@ -150,38 +150,29 @@ def list_appointments(request, pk=None):
     #     Note: Code to modify an existing appointment.
     elif request.method == "PUT":
         try:
-<<<<<<< HEAD
-            if pk==None:
-                appointment=Appointment.objects.all()
-            else:
-                appointment=Appointment.objects.filter(id=pk)
-            Appointment.objects.filter(id=id.update(**content))
-            return JsonResponse(
-                {"appointment":appointment},
-=======
             content=json.loads(request.body)
-            appoint=Appointment.objects.get(id=pk)
-            properties=["canceled", "finished", "created"]
-            for properties in 
-            auto.save()
+            appointment=Appointment.objects.get(id=pk)
+            props=["status"]
+            for prop in props:
+                if prop in content:
+                    setattr(appointment, prop, content[prop])
+            appointment.save()
             return JsonResponse(
-                appoint,
->>>>>>> hals
+                appointment,
                 encoder=AppointmentEncoder,
                 safe=False,
             )
-        except appoint.DoesNotExist:
-            response=JsonResponse({"message":"Appoinment does not exist"})
+        except Appointment.DoesNotExist:
+            response=JsonResponse({"message":"Appointment does not exist"})
             response.status_code=404
             return response
-        
-
-            )
 
 
-        
 
 
+
+
+ 
 # ================================================================================================
 
 @require_http_methods(["GET"])

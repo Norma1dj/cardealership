@@ -64,7 +64,7 @@ function CreateManufacturerForm() {
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Add Manufacturer</h1>
+                        <h1>Create Manufacturer</h1>
                         <form onSubmit={handleSubmit} id="create-presentation-form">
                             <div className="form-floating mb-3">
                                 <input  onChange={handleNameChange} value={name}  placeholder="name" required type="text" id="name"

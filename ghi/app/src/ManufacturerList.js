@@ -40,8 +40,6 @@ return (
           return (
             <tr key={manufacturer.id}>
               <td>{ manufacturer.name} </td>
-          
-              
             </tr>
                 );
 })}

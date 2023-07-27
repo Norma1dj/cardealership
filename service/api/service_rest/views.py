@@ -144,12 +144,13 @@ def list_appointments(request, pk=None):
             response=JsonResponse({"message":"Appointment does not exist"})
         except Exception as e:
             response=JsonResponse({"message":"Could not delete this appointment"})
-            reponse.status_code=400
+            response.status_code=400
             return response
     # PUT ==============================================
     #     Note: Code to modify an existing appointment.
     elif request.method == "PUT":
         try:
+<<<<<<< HEAD
             if pk==None:
                 appointment=Appointment.objects.all()
             else:
@@ -157,13 +158,27 @@ def list_appointments(request, pk=None):
             Appointment.objects.filter(id=id.update(**content))
             return JsonResponse(
                 {"appointment":appointment},
+=======
+            content=json.loads(request.body)
+            appoint=Appointment.objects.get(id=pk)
+            properties=["canceled", "finished", "created"]
+            for properties in 
+            auto.save()
+            return JsonResponse(
+                appoint,
+>>>>>>> hals
                 encoder=AppointmentEncoder,
                 safe=False,
             )
-        except Appointment.DoesNotExist:
-            reponse=JsonResponse({"message":"Appointment not found"})
-            reponse.status_code=400
-            return reponse
+        except appoint.DoesNotExist:
+            response=JsonResponse({"message":"Appoinment does not exist"})
+            response.status_code=404
+            return response
+        
+
+            )
+
+
         
 
 

@@ -33,7 +33,7 @@ function CreateModelForm() {
       data.manufacturer_id = manufacturer_id;
   
       
-      console.log(data);
+      
   
       const modelsUrl = `http://localhost:8100/api/models/`;
       const fetchConfig = {
@@ -47,7 +47,7 @@ function CreateModelForm() {
       const response = await fetch(modelsUrl, fetchConfig);
       if (response.ok) {
         const newModel = await response.json();
-        console.log(newModel);
+       
   
     
       setName('');
@@ -66,7 +66,7 @@ function CreateModelForm() {
       if (response.ok) {
         const data = await response.json();
         setManufacturers(data.manufacturers);
-        console.log(data.manufacturers)
+        
         
         
       }

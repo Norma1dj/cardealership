@@ -16,7 +16,7 @@ function CreateManufacturerForm() {
     const data = {};
 
     data.name = name;
-    console.log(data);
+    
 
     const manufacturerUrl = `http://localhost:8100/api/manufacturers/`;
     const fetchConfig = {
@@ -30,7 +30,7 @@ function CreateManufacturerForm() {
     const response = await fetch(manufacturerUrl, fetchConfig);
     if (response.ok) {
       const newManufacturer = await response.json();
-      console.log(newManufacturer);
+      
 
   
     setName('');
@@ -47,7 +47,7 @@ function CreateManufacturerForm() {
 //     if (response.ok) {
 //       const data = await response.json();
 //       setManufacturers(data.manufacturers);
-//       console.log(data.manufacturers)
+
       
       
 //     }

@@ -32,7 +32,7 @@ function AddSalesPersonForm() {
     data.employee_id = employee_id;
 
     
-    console.log(data);
+    
 
     const salepersonUrl = `http://localhost:8090/api/salespeople/`;
     const fetchConfig = {
@@ -46,7 +46,7 @@ function AddSalesPersonForm() {
     const response = await fetch(salepersonUrl, fetchConfig);
     if (response.ok) {
       const newsalesperson = await response.json();
-      console.log(newsalesperson);
+      
 
   
     setFirst('');

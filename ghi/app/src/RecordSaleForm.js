@@ -46,7 +46,7 @@ function RecordSaleForm() {
     data.price = price;
 
     
-    console.log(data);
+   
 
     const salesUrl = `http://localhost:8090/api/sales/`;
     const fetchConfig = {
@@ -77,7 +77,7 @@ function RecordSaleForm() {
     const response = await fetch(salesUrl, fetchConfig);
     if (response.ok) {
       const newSale = await response.json();
-      console.log(newSale);
+      
 
   
     setVin('');

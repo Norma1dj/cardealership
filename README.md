@@ -79,6 +79,10 @@ Team:
     Service Microservice
         http://localhost:8090
 
+    Polling
+        http://project-beta-inventory-api-1:8000/api/automobiles/
+
+        
 ### Sales API Information
 
     There are a total of 9 apis for the Sales Microservice

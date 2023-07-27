@@ -21,6 +21,9 @@ function SalesPersonList(props) {
 
   return (
 
+    
+
+
 <table className="table table-striped">
         <thead>
           <tr>
@@ -43,6 +46,8 @@ function SalesPersonList(props) {
 
         </tbody>
       </table>
+      
+      
   );
 }
 

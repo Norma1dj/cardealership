@@ -60,9 +60,7 @@ Team:
 
     Our sales and services microservices use pollers to retrieve the most up-to-date data from the inventory microservice. Sales polls every second while services polls every 60 seconds.
 
-*** CARCAR DIAGRAM PLACEHOLDER**
-*** CARCAR DIAGRAM PLACEHOLDER**
-*** CARCAR DIAGRAM PLACEHOLDER**
+    ![Img](/images/project_beta_CarCar.png)
 
 
 

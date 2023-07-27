@@ -67,8 +67,8 @@ Team:
         http://localhost:8090
 
 ### Sales API Information
- There are a total of 9 apis for the Sales Microservice
 
+    There are a total of 9 apis for the Sales Microservice
 
 #### Customer API
 
@@ -218,5 +218,12 @@ microservice, here.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+This service uses 4 models:
+    -Sales (Aggregate Root)
+    -Customer 
+    -Salesperosn
+    -AutomobileVO
+
+The Sales model uses data from the other 3 models to update a sales record.
+
+The automobileVO is used by the sales poller to get updated information from the Inventory Microservice every second. This allows the sales model to get up-to-date automobile inventory vin and sold information.

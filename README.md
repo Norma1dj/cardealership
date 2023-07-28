@@ -107,6 +107,7 @@ DELETE  http://localhost:8090/api/customers/:id/
 
 GET     http://localhost:8090/api/customers/
 JSON Body Returned
+
         ```
         {
         "customers": [
@@ -123,6 +124,7 @@ JSON Body Returned
 
 POST    http://localhost:8090/api/customers/
 Required JSON Body (POST)
+
         ```    
         {
             "first_name": "JohnnyJohn",
@@ -138,6 +140,7 @@ DELETE  http://localhost:8090/api/salespeople/:id/
 
 GET     http://localhost:8090/api/salespeople/
 JSON Body Returned
+
         ```
         {
         "salespeople": [
@@ -152,6 +155,7 @@ JSON Body Returned
 
 POST    http://localhost:8090/api/salespeople/
 Required JSON Body (POST)
+
         ```
         {
             "first_name": "John",
@@ -165,6 +169,7 @@ Required JSON Body (POST)
 DELETE  http://localhost:8090/api/sales/:id/
 GET     http://localhost:8090/api/sales/
 JSON Body Returned
+
         ```
         {
         "sales": [
@@ -193,6 +198,7 @@ JSON Body Returned
 
 POST    http://localhost:8090/api/sales/
 Required JSON Body (POST)
+
         ```
         {
             "price": 10500,

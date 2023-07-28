@@ -19,22 +19,22 @@ Team:
 
 ## Getting Started
 
-    Requirements:
-        -Docker
-        -Git
-        -Node.js
-        -Insomnia(optional)
+* Requirements:
+    - Docker
+    - Git
+    - Node.js
+    - Insomnia(optional)
 
-    Steps:
-        -Fork the repository
-        -Clone to your local computer:
-            -git clone << url >>
-        -Start up the project using Docker
-            -docker volume create beta-data
-            -docker compose build
-            -docker compose up
-        -Verify in the Docker app all containers  are running without errors
-        -Access the frontend at http://localhost:3000/
+* Steps:
+    - Fork the repository
+    - Clone to your local computer:
+        - git clone << url >>
+    - Start up the project using Docker
+        - docker volume create beta-data
+        - docker compose build
+        - docker compose up
+    - Verify in the Docker app all containers  are running without errors
+    - Access the frontend at http://localhost:3000/
 
 
 
@@ -58,11 +58,11 @@ Team:
         - Services
         - Inventory
 
-    Our sales and services microservices use pollers to retrieve the most
-    up-to-date data from the inventory microservice. Sales polls every
-    second while services polls every 60 seconds.
+Our sales and services microservices use pollers to retrieve the most
+up-to-date data from the inventory microservice. Sales polls every
+second while services polls every 60 seconds.
 
-    ![Img](/images/project_beta_CarCar.png)
+![Img](/images/project_beta_CarCar.png)
 
 
 ## Sales microservice
@@ -82,22 +82,22 @@ Team:
 
 ### Urls and Ports
 
-    Inventory Microservice
-        http://localhost:8100
+* Inventory Microservice
+    http://localhost:8100
 
-    Sales Microservice
-        http://localhost:8090
+* Sales Microservice
+    http://localhost:8090
 
-    Service Microservice
-        http://localhost:8090
+* Service Microservice
+    http://localhost:8090
 
-    Polling
-        http://project-beta-inventory-api-1:8000/api/automobiles/
+* Polling
+    http://project-beta-inventory-api-1:8000/api/automobiles/
 
         
 ### Sales API Information
 
-    There are a total of 9 apis for the Sales Microservice
+There are a total of 9 apis for the Sales Microservice
 
 #### Customer API
 

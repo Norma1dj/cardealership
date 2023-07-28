@@ -107,30 +107,30 @@ DELETE  http://localhost:8090/api/customers/:id/
 
 GET     http://localhost:8090/api/customers/
 JSON Body Returned
-    ```
-    {
-    "customers": [
+        ```
         {
-            "first_name": "Johnny",
-            "last_name": "DoeDoe",
-            "address": "123123 Main St",
-            "phone_number": "555-123-1111",
-            "id": 3
-        },]
-    }
-    ```
+        "customers": [
+            {
+                "first_name": "Johnny",
+                "last_name": "DoeDoe",
+                "address": "123123 Main St",
+                "phone_number": "555-123-1111",
+                "id": 3
+            },]
+        }
+        ```
 
 
 POST    http://localhost:8090/api/customers/
 Required JSON Body (POST)
-    ```    
-    {
-        "first_name": "JohnnyJohn",
-        "last_name": "DoeDoeDoe",
-        "address": "123123123 Main St",
-        "phone_number": "555-123-2222"
-    }
-    ```
+        ```    
+        {
+            "first_name": "JohnnyJohn",
+            "last_name": "DoeDoeDoe",
+            "address": "123123123 Main St",
+            "phone_number": "555-123-2222"
+        }
+        ```
             
 #### Salespeople API
 
@@ -138,69 +138,69 @@ DELETE  http://localhost:8090/api/salespeople/:id/
 
 GET     http://localhost:8090/api/salespeople/
 JSON Body Returned
-    ```
-    {
-    "salespeople": [
+        ```
         {
-            "first_name": "JaneJane",
-            "last_name": "Smith",
-            "employee_id": "2",
-            "id": 2
-        },]
-    }
-    ```
+        "salespeople": [
+            {
+                "first_name": "JaneJane",
+                "last_name": "Smith",
+                "employee_id": "2",
+                "id": 2
+            },]
+        }
+        ```
 
 POST    http://localhost:8090/api/salespeople/
 Required JSON Body (POST)
-    ```
-    {
-        "first_name": "John",
-        "last_name": "Rabbit",
-        "employee_id": "3"
-    }
-    ```
+        ```
+        {
+            "first_name": "John",
+            "last_name": "Rabbit",
+            "employee_id": "3"
+        }
+        ```
 
 #### Sale API
 
 DELETE  http://localhost:8090/api/sales/:id/
 GET     http://localhost:8090/api/sales/
 JSON Body Returned
-    ```
-    {
-    "sales": [
+        ```
         {
-            "price": "222222.00",
-            "id": 13,
-            "customer": {
-                "first_name": "Johnny",
-                "last_name": "DoeDoe",
-                "address": "123123 Main St",
-                "phone_number": "555-123-1111",
-                "id": 3
-            },
-            "automobile": {
-                "sold": true,
-                "vin": "1C3CC5FB2AN120173"
-            },
-            "salesperson": {
-                "first_name": "JaneJane",
-                "last_name": "Smith",
-                "employee_id": "2"
-            }
-        }]
-    }
-    ```
+        "sales": [
+            {
+                "price": "222222.00",
+                "id": 13,
+                "customer": {
+                    "first_name": "Johnny",
+                    "last_name": "DoeDoe",
+                    "address": "123123 Main St",
+                    "phone_number": "555-123-1111",
+                    "id": 3
+                },
+                "automobile": {
+                    "sold": true,
+                    "vin": "1C3CC5FB2AN120173"
+                },
+                "salesperson": {
+                    "first_name": "JaneJane",
+                    "last_name": "Smith",
+                    "employee_id": "2"
+                }
+            }]
+        }
+        ```
 
 POST    http://localhost:8090/api/sales/
 Required JSON Body (POST)
-    ```
-    {
-        "price": 10500,
-        "customer": 4, 
-        "automobile": "1C3CC5FB2AN120174",
-        "salesperson": "2"
-    }
-    ```
+        ```
+        {
+            "price": 10500,
+            "customer": 4, 
+            "automobile": "1C3CC5FB2AN120174",
+            "salesperson": "2"
+        }
+        ```
 
 
 ## Service microservice

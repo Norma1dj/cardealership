@@ -106,8 +106,7 @@ There are a total of 9 apis for the Sales Microservice
 DELETE  http://localhost:8090/api/customers/:id/
 
 GET     http://localhost:8090/api/customers/
-
-    JSON Body Returned
+JSON Body Returned
     ```
     {
     "customers": [
@@ -122,25 +121,23 @@ GET     http://localhost:8090/api/customers/
     ```
 
 
-    POST    http://localhost:8090/api/customers/
-
-            Required JSON Body (POST)
-            ```    
-            {
-                "first_name": "JohnnyJohn",
-                "last_name": "DoeDoeDoe",
-                "address": "123123123 Main St",
-                "phone_number": "555-123-2222"
-            }
-            ```
+POST    http://localhost:8090/api/customers/
+Required JSON Body (POST)
+    ```    
+    {
+        "first_name": "JohnnyJohn",
+        "last_name": "DoeDoeDoe",
+        "address": "123123123 Main St",
+        "phone_number": "555-123-2222"
+    }
+    ```
             
 #### Salespeople API
 
 DELETE  http://localhost:8090/api/salespeople/:id/
 
 GET     http://localhost:8090/api/salespeople/
-
-    JSON Body Returned
+JSON Body Returned
     ```
     {
     "salespeople": [
@@ -154,8 +151,7 @@ GET     http://localhost:8090/api/salespeople/
     ```
 
 POST    http://localhost:8090/api/salespeople/
-
-    Required JSON Body (POST)
+Required JSON Body (POST)
     ```
     {
         "first_name": "John",
@@ -167,10 +163,8 @@ POST    http://localhost:8090/api/salespeople/
 #### Sale API
 
 DELETE  http://localhost:8090/api/sales/:id/
-
 GET     http://localhost:8090/api/sales/
-
-    JSON Body Returned
+JSON Body Returned
     ```
     {
     "sales": [
@@ -198,8 +192,7 @@ GET     http://localhost:8090/api/sales/
     ```
 
 POST    http://localhost:8090/api/sales/
-
-    Required JSON Body (POST)
+Required JSON Body (POST)
     ```
     {
         "price": 10500,

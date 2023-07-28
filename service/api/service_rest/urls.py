@@ -8,4 +8,6 @@ urlpatterns = [
     path("appointments/",list_appointments, name="list_appointments"),
     path("appointments/<int:pk>/",list_appointments, name="list_appointments"),
     path("automobiles/",list_automobiles, name="list_automobiles"),
+    path("appointments/<int:pk>/cancel",list_appointments, name="list_appointments"),
+    path("appointments/<int:pk>/finish",list_appointments, name="list_appointments"),
 ]

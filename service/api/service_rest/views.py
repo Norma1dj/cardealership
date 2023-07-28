@@ -32,10 +32,10 @@ class AppointmentEncoder(ModelEncoder):
     def get_extra_data(self, o):
      return {
          "technician": {
-            # "first_name": o.technician.first_name,
-            # "last_name": o.technician.last_name,
-            # "employee_id": o.technician.employee_id,
-             "id": o.technician.id,                          # added id for django primary key
+            "first_name": o.technician.first_name,
+            "last_name": o.technician.last_name,
+            "employee_id": o.technician.employee_id,
+            "id": o.technician.id,                          # added id for django primary key
          }
      }
 

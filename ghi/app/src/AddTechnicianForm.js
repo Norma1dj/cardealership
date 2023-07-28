@@ -26,7 +26,7 @@ function AddTechnicianForm() {
     event.preventDefault();
 
     const data = {};
-
+    console.log(data)
     data.first_name = first_name;
     data.last_name = last_name;
     data.employee_id = employee_id;
@@ -85,7 +85,7 @@ function AddTechnicianForm() {
                             <button className="btn bg-success btn-primary">Create</button>
                         </form>
                         <div className="alert alert-success d-none mb-0" id="success-message">
-                            tech successfully created!
+                            Tech successfully created!
                           </div>
                     </div>
                 </div>

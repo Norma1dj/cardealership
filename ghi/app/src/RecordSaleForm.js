@@ -150,6 +150,7 @@ function RecordSaleForm() {
                               })}
                               </select>
                           </div>
+                          
                          <div className="mb-3">
                               <select onChange={handleCustomerChange} required value={customer} id="customer" name="customer" className="form-select">
                                   <option value="">Choose a Customer</option>

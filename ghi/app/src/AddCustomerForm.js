@@ -100,7 +100,7 @@ function AddCustomerForm() {
                             <button className="btn bg-success btn-primary">Create</button>
                         </form>
                         <div className="alert alert-success d-none mb-0" id="success-message">
-                            Your customer successfully created!
+                            Customer successfully created!
                           </div>
                     </div>
                 </div>

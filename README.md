@@ -192,6 +192,7 @@ POST    http://localhost:8090/api/salespeople/
 #### Sale API
 
 DELETE  http://localhost:8090/api/sales/:id/
+
 GET     http://localhost:8090/api/sales/
 
 

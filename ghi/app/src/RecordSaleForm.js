@@ -66,18 +66,20 @@ function RecordSaleForm() {
       },
     };
 
-    const updateResponse = await fetch(updateUrl, updateConfig);
-    if (updateResponse.ok) {
-      const updatedAutomobile = await updateResponse.json();
-      console.log("Automobile updated:", updatedAutomobile);
-    } else {
-      console.error("Failed to updatesold status.");
-    }
+   
   
     const response = await fetch(salesUrl, fetchConfig);
     if (response.ok) {
       const newSale = await response.json();
       
+      const updateResponse = await fetch(updateUrl, updateConfig);
+      if (updateResponse.ok) {
+        const updatedAutomobile = await updateResponse.json();
+        console.log("Automobile updated:", updatedAutomobile);
+      } else {
+        console.error("Failed to updatesold status.");
+      }
+    
 
   
     setVin('');

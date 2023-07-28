@@ -72,7 +72,7 @@ second while services polls every 60 seconds.
 * This service uses 4 models:
     - Sales
     - Customer 
-    - Salesperosn
+    - Salesperson
     - AutomobileVO
 
 * The Sales model uses data from the other 3 models to update a sales record.
@@ -87,6 +87,22 @@ second while services polls every 60 seconds.
     - List Sales http://localhost:3000/sales/
     - Record Sale http://localhost:3000/sales/create/
     - Sales by Salesperson http://localhost:3000/sales/history/
+
+## Services microservice
+
+* This service uses 3 models:
+    - Technician
+    - Appointment
+    - AutomobileVO
+
+* The Appointment model uses data from the other 2 models to update a sales record.
+
+* The automobileVO is used by the services poller to get updated information from the Inventory Microservice every  60 seconds. This allows the Appointment model to get up-to-date automobile inventory vin and sold information.
+
+* Services URLs
+    - List Technicians http://localhost:3000//technicians/
+    - Add Technician http://localhost:3000//technicians/create/
+    - List Appointments http://localhost:3000/appointments/create/
     
 
 ## API Documentation
@@ -255,54 +271,148 @@ POST    http://localhost:8090/api/sales/
             }
         }
 
-## Service microservice
-MODEL EXPLANATION AND MICROSERVICE INTEGRATION:
-    AutomobileVo model: #===============================
-         vin = [
-                 for_service_appointment_setting,
-                 for_service_appointment_canceling,
-                 for_inventory_keeping,
-                 for_vip_identification ]
-         
-         sold = [
-                  for_inventory_updating,
-                  for_vip_identification ]
+### Services API Information
 
-    Appointment model: #===============================
-         vip        = [ 
-                        if_automobile_sold_from_inventory
-                        give_special_treatment
-                      ]
+There are a total of 8 apis for the Service Microservice
 
-         date_time  = [
-                        for_record_keeping
-                      ]
+#### Technicians API
 
-         reason     = [
-                        for_service_appointment
-                      ]
+DELETE  http://localhost:8080/api/technicians/:id
 
-         status     = [
-                        state_of_service
-                           [created, canceled, finished]
-                      ]
+GET     http://localhost:8080/api/technicians/
+
+
+                JSON Body Returned
+        {
+            "techs": [
+                {
+                    "first_name": "Drew",
+                    "last_name": "Norman-Meadows",
+                    "employee_id": "dre3w",
+                    "id": 1
+                }
+            ]
+        }
         
-         vin        = [
-                        car_identification,
-                        vip_identification
-                      ]   
-               
-        customer    = [
-                        car_ownership,
-                        service_history
-                      ]
+
+
+POST    http://localhost:8080/api/technicians/
+
+
+            JSON Body Sent
+        {
+            "first_name": "John",
+            "last_name": "Doe",
+            "employee_id": "12345"
+        }
+
+             JSON Body Returned
+        {
+            "first_name": "John",
+            "last_name": "Doe",
+            "employee_id": "12345",
+            "id": 1
+        }
+            
+#### Appointments API
+
+DELETE  http://localhost:8080/api/appointments/:id
+
+GET     http://localhost:8080/api/appointments/
+
+
+                JSON Body Returned
+        {
+        "appointment": [
+            {
+                "vip": "Yes",
+                "date_time": "2023-07-27T15:30:00+00:00",
+                "reason": "Regular checkup",
+                "status": "Scheduled",
+                "vin": "ABC123",
+                "customer": "Jodhn Dode",
+                "id": 3,
+                "technician": {
+                    "id": 1
+                } 
+            }]
+
+            },
         
-        technician  = [
-                        service_person,
-                        service_identification
-                      ] 
-    
+
+
+POST    http://localhost:8080/api/appointments/
+
+
+            JSON Body Sent
+        {
+            "vip": "Yes",
+            "date_time": "2023-07-27 15:30",
+            "reason": "Regular checkup",
+            "status": "Scheduled",
+            "vin": "ABC123",
+            "customer": "Jodhn Dode",
+            "technician_id": 1
+        }
+
+             JSON Body Returned
+        {
+            "vip": "Yes",
+            "date_time": "2023-07-27 15:30",
+            "reason": "Regular checkup",
+            "status": "Scheduled",
+            "vin": "ABC123",
+            "customer": "Jodhn Dode",
+            "id": 6,
+            "technician": {
+                "id": 1
+            }
+        }
+            
+PUT "canceled"    http://localhost:8080/api/appointments/:id/cancel
+
+            
+            JSON Body Sent
+        {
+            "status": "canceled"
+        }
+
+            JSON Body Returned
+        {
+            "vip": "Yes",
+            "date_time": "2023-07-27T15:30:00+00:00",
+            "reason": "Regular checkup",
+            "status": "canceled",
+            "vin": "ABC123",
+            "customer": "Jodhn Dode",
+            "id": 2,
+            "technician": {
+                "id": 1
+            }
+        }    
 
 
 
 
+
+PUT "canceled"    http://localhost:8080/api/appointments/:id/finish
+
+
+            JSON Body Sent
+        {
+            "status": "finished"
+        }
+
+            JSON Body Returned
+        {
+            "vip": "Yes",
+            "date_time": "2023-07-27T15:30:00+00:00",
+            "reason": "Regular checkup",
+            "status": "finished",
+            "vin": "ABC123",
+            "customer": "Jodhn Dode",
+            "id": 3,
+            "technician": {
+                "id": 1
+            }
+        }

@@ -53,7 +53,7 @@ function CreateModelForm() {
       setName('');
       setPicture('');
       setManufacturer('');
-      setManufacturers([]);
+      
           
       }
     }

@@ -79,6 +79,15 @@ second while services polls every 60 seconds.
 
 * The automobileVO is used by the sales poller to get updated information from the Inventory Microservice every second. This allows the sales model to get up-to-date automobile inventory vin and sold information.
 
+* Sales URLs
+    - List Customer http://localhost:3000/customers/
+    - Add Customer http://localhost:3000/customers/create/
+    - List Salepeople http://localhost:3000/salespeople/
+    - Add Salesperson http://localhost:3000/salespeople/create/
+    - List Sales http://localhost:3000/sales/
+    - Record Sale http://localhost:3000/sales/create/
+    - Sales by Salesperson http://localhost:3000/sales/history/
+    
 
 ## API Documentation
 
@@ -125,14 +134,22 @@ JSON Body Returned
 POST    http://localhost:8090/api/customers/
 Required JSON Body (POST)
 
-        ```    
+            JSON Body Sent
         {
             "first_name": "JohnnyJohn",
             "last_name": "DoeDoeDoe",
             "address": "123123123 Main St",
             "phone_number": "555-123-2222"
         }
-        ```
+
+             JSON Body Returned
+        {
+            "first_name": "JohnnyJohn",
+            "last_name": "DoeDoeDoe",
+            "address": "123123123 Main St",
+            "phone_number": "555-123-2222",
+            "id": 4
+        }
             
 #### Salespeople API
 
@@ -156,13 +173,21 @@ JSON Body Returned
 POST    http://localhost:8090/api/salespeople/
 Required JSON Body (POST)
 
-        ```
+             JSON Body Sent
         {
             "first_name": "John",
             "last_name": "Rabbit",
             "employee_id": "3"
         }
-        ```
+
+            JSON Body Returned
+        {
+            "first_name": "John",
+            "last_name": "Rabbit",
+            "employee_id": "3",
+            "id": 17
+        }
+        
 
 #### Sale API
 
@@ -199,15 +224,35 @@ JSON Body Returned
 POST    http://localhost:8090/api/sales/
 Required JSON Body (POST)
 
-        ```
+            JSON Body Sent
         {
             "price": 10500,
             "customer": 4, 
             "automobile": "1C3CC5FB2AN120174",
             "salesperson": "2"
         }
-        ```
 
+             JSON Body Returned
+        {
+            "price": "19999.99",
+            "id": 5,
+            "customer": {
+                "first_name": "Customer1",
+                "last_name": "lastname1",
+                "address": "1233",
+                "phone_number": "1111111",
+                "id": 1
+            },
+            "automobile": {
+                "sold": true,
+                "vin": "KL4CJASB0FBtest04"
+            },
+            "salesperson": {
+                "first_name": "Terry",
+                "last_name": "Gene",
+                "employee_id": "2"
+            }
+        }
 
 ## Service microservice
 MODEL EXPLANATION AND MICROSERVICE INTEGRATION:

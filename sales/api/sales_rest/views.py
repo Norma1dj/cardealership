@@ -162,15 +162,23 @@ def api_sale_list(request, pk=None):
 
     # GET method for getting list of sales or individual sale
     if request.method == "GET":
-        if pk == None:
-            sales = Sale.objects.all()
-        else:
-            sales = Sale.objects.filter(id=pk)
-        return JsonResponse(
-            {"sales": sales},
-            encoder=SaleListEncoder,
-            safe=False,
-        )
+        try:
+            if pk == None:
+                sales = Sale.objects.all()
+            else:
+                sales = Sale.objects.filter(id=pk)
+            return JsonResponse(
+                {"sales": sales},
+                encoder=SaleListEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse({"message": "Error retreiving list of sales"})
+            response.status_code = 400
+            return response
+       
+
+
     # GET method for getting list of sales or individual sale
 
     # DELETE a single sale

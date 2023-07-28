@@ -53,14 +53,16 @@ Team:
        - created a list all service appointments
        - created a list service history for a certain car
 
-    * CarCar integrates 3 microservices:
-        - Sales
-        - Services
-        - Inventory
+* CarCar integrates 3 microservices:
+    - Sales
+    - Services
+    - Inventory
 
 Our sales and services microservices use pollers to retrieve the most
 up-to-date data from the inventory microservice. Sales polls every
 second while services polls every 60 seconds.
+
+
 
 ![Img](/images/project_beta_CarCar.png)
 
@@ -101,23 +103,23 @@ There are a total of 9 apis for the Sales Microservice
 
 #### Customer API
 
-    DELETE  http://localhost:8090/api/customers/<id>/
+DELETE  http://localhost:8090/api/customers/:id/
 
-    GET     http://localhost:8090/api/customers/
+GET     http://localhost:8090/api/customers/
 
-            JSON Body Returned
-            ```
-            {
-            "customers": [
-                {
-                    "first_name": "Johnny",
-                    "last_name": "DoeDoe",
-                    "address": "123123 Main St",
-                    "phone_number": "555-123-1111",
-                    "id": 3
-                },]
-            }
-            ```
+    JSON Body Returned
+    ```
+    {
+    "customers": [
+        {
+            "first_name": "Johnny",
+            "last_name": "DoeDoe",
+            "address": "123123 Main St",
+            "phone_number": "555-123-1111",
+            "id": 3
+        },]
+    }
+    ```
 
 
     POST    http://localhost:8090/api/customers/
@@ -134,78 +136,78 @@ There are a total of 9 apis for the Sales Microservice
             
 #### Salespeople API
 
-    DELETE  http://localhost:8090/api/salespeople/<id>/
+DELETE  http://localhost:8090/api/salespeople/:id/
 
-    GET     http://localhost:8090/api/salespeople/
+GET     http://localhost:8090/api/salespeople/
 
-            JSON Body Returned
-            ```
-            {
-            "salespeople": [
-                {
-                    "first_name": "JaneJane",
-                    "last_name": "Smith",
-                    "employee_id": "2",
-                    "id": 2
-                },]
-            }
-            ```
+    JSON Body Returned
+    ```
+    {
+    "salespeople": [
+        {
+            "first_name": "JaneJane",
+            "last_name": "Smith",
+            "employee_id": "2",
+            "id": 2
+        },]
+    }
+    ```
 
-    POST    http://localhost:8090/api/salespeople/
+POST    http://localhost:8090/api/salespeople/
 
-            Required JSON Body (POST)
-            ```
-            {
-                "first_name": "John",
-                "last_name": "Rabbit",
-                "employee_id": "3"
-            }
-            ```
+    Required JSON Body (POST)
+    ```
+    {
+        "first_name": "John",
+        "last_name": "Rabbit",
+        "employee_id": "3"
+    }
+    ```
 
 #### Sale API
 
-    DELETE  http://localhost:8090/api/sales/<id>/
+DELETE  http://localhost:8090/api/sales/:id/
 
-    GET     http://localhost:8090/api/sales/
+GET     http://localhost:8090/api/sales/
 
-            JSON Body Returned
-            ```
-            {
-            "sales": [
-                {
-                    "price": "222222.00",
-                    "id": 13,
-                    "customer": {
-                        "first_name": "Johnny",
-                        "last_name": "DoeDoe",
-                        "address": "123123 Main St",
-                        "phone_number": "555-123-1111",
-                        "id": 3
-                    },
-                    "automobile": {
-                        "sold": true,
-                        "vin": "1C3CC5FB2AN120173"
-                    },
-                    "salesperson": {
-                        "first_name": "JaneJane",
-                        "last_name": "Smith",
-                        "employee_id": "2"
-                    }
-                }]
+    JSON Body Returned
+    ```
+    {
+    "sales": [
+        {
+            "price": "222222.00",
+            "id": 13,
+            "customer": {
+                "first_name": "Johnny",
+                "last_name": "DoeDoe",
+                "address": "123123 Main St",
+                "phone_number": "555-123-1111",
+                "id": 3
+            },
+            "automobile": {
+                "sold": true,
+                "vin": "1C3CC5FB2AN120173"
+            },
+            "salesperson": {
+                "first_name": "JaneJane",
+                "last_name": "Smith",
+                "employee_id": "2"
             }
-            ```
+        }]
+    }
+    ```
 
-    POST    http://localhost:8090/api/sales/
+POST    http://localhost:8090/api/sales/
 
-            Required JSON Body (POST)
-            ```
-            {
-                "price": 10500,
-                "customer": 4, 
-                "automobile": "1C3CC5FB2AN120174",
-                "salesperson": "2"
-            }
-            ```
+    Required JSON Body (POST)
+    ```
+    {
+        "price": 10500,
+        "customer": 4, 
+        "automobile": "1C3CC5FB2AN120174",
+        "salesperson": "2"
+    }
+    ```
 
 
 ## Service microservice

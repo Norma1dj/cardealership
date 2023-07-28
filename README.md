@@ -102,7 +102,8 @@ second while services polls every 60 seconds.
 * Services URLs
     - List Technicians http://localhost:3000//technicians/
     - Add Technician http://localhost:3000//technicians/create/
-    - List Appointments http://localhost:3000/appointments/create/
+    - List Appointments http://localhost:3000/appointments/
+    - Add Appointment http://localhost:3000/appointments/create/
     
 
 ## API Documentation

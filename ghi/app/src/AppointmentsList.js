@@ -137,8 +137,8 @@ function AppointmentsList(props) {
                 <td>{ appoint.vin }</td>
                 {isVip(appointment.customer)}                                              
                 <td>{ appoint.customer }</td>  
-                <td>{ new Date(appoint.date_time).toLocaleDateString }</td>
-                <td>{ new Date(appoint.date_time).toLocaleTimeString }</td>
+                <td>{ new Date(appoint.date_time).toLocaleDateString() }</td>
+                <td>{ new Date(appoint.date_time).toLocaleTimeString() }</td>
                 <td>{ appoint.technician.first_name} { appoint.technician.last_name}</td>
                 <td>{ appoint.reason }</td>
                 <td><button onClick={() => handleCancel(appointment.id)} type="button" className="btn btn-danger">Cancel</button></td>

@@ -79,7 +79,7 @@ function Nav() {
               <NavLink className="nav-link" to="/appointments/">List Appointments</NavLink>
             </li>
             <li className="nav_item">
-              <NavLink className="nav-link" to="/appointments/">List Services</NavLink>
+              <NavLink className="nav-link" to="/appointments/list">List Services</NavLink>
             </li>
 
           </ul>

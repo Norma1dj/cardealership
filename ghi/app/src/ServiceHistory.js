@@ -1,89 +1,85 @@
 import React, { useEffect, useState } from 'react';
 
 function ServiceHistory() {
-  const [vinNums, setVinNums] = useState([]);
-  const [vinNum, setVinNum] = useState([]);
-  const [vin, setVin] = useState(null);
+  const [services, setServices] = useState([]);
+  const [carVins, setCarVins] = useState([]);
+  const [selectedVin, setSelectedVin] = useState('');
 
   useEffect(() => {
-    fetchVinNums();
-    fetchNum();
+    fetchService();
+    fetchCarVins();
   }, []);
 
-  const fetchNumbers = async () => {
-    const url = 'http://localhost:8100/api/automobiles/';
+  const fetchService = async () => {
+    const url = 'http://localhost:8080/api/appointments/';
 
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      setVin(data.vin);
+      setServices(data.services);
     }
   };
 
-//  const fetchSalespeople = async () => {
-//    const url = 'http://localhost:8100/api/automobiles/';
-//
-//    const response = await fetch(url);
-//    if (response.ok) {
-//      const data = await response.json();
-//      setSalespeople(data.salespeople);
-//    }
-//  };
+  const fetchCarVins = async () => {
+    const url = 'http://localhost:8080/api/appoinments/';
+
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      setCarVins(data.carVins);
+    }
+  };
 
   const handleVinChange = (event) => {
     const value = event.target.value;
-    const selectedVin = vinNum.find(
-      (vin) =>
-        vin.vin === value );
+    const selectedVin = carVins.find(
+      (carVins) =>
+        carVins === value 
+    );
 
     setSelectedVin(selectedVin);
   };
 
-  const filteredVin = vinNums.filter(
-    (VinNums) =>
-      selectedVin && VinNums.vin
+  const filteredServices = services.filter(
+    (serviced) =>
+      selectedVin === serviced.vin
   );
 
   return (
     <div>
       <h1>Service History</h1>
-      <div className="mb-3">
-        <select
-          onChange={handleSelectedVinChange}
-          required
-          value={selectedSalesperson ? selectedSalesperson.first_name : ''}
-          id="salesperson"
-          name="salesperson"
-          className="form-select"
-        >
-          <option value="">Search by VIN...</option>
-          {salespeople.map((salesperson) => (
-            <option key={salesperson.id} value={salesperson.first_name}>
-              {salesperson.first_name} {salesperson.last_name} 
-            </option>
-          ))}
-        </select>
+      <div className="form-floating mb-3">
+                            <input onChange={handleVinChange} placeholder="VIN..." required type="text" name="selectedVin" id="selectedVin" className="form-control" value={selectedVin} />
+                            <label htmlFor="selectedVin">VIN</label>
       </div>
       <table className="table table-striped">
         <thead>
           <tr>
             
-            <th>Salesperson</th>
+            <th>VIN</th>
+            <th>Is Vip?</th>
             <th>Customer</th>
-            <th>Vin</th>
-            <th>Price</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Technician</th>
+            <th>Reason</th>
+            <th>Status</th>
+
           </tr>
         </thead>
         <tbody>
-          {vinNums.map((vinNums) => (
-            <tr key={vin.id}>
+          {filteredServices.map((serviced) => (
+            <tr key={serviced.id}>
               
-              <td>
-                {vin.salesperson.first_name} {vin.salesperson.last_name}
-              </td>
-              <td>{vin.customer.first_name}</td>
-              <td>{vin.automobile.vin}</td>
-              <td>{vin.price}</td>
+              <td>{serviced.vin}</td>
+              <td>{serviced.vip}</td>
+              <td>{serviced.customer}</td>
+              <td>{serviced.date}</td>
+              <td>{serviced.time}</td>
+              <td>{serviced.technician}</td>
+              <td>{serviced.reason}</td>
+              <td>{serviced.status}</td>
+
             </tr>
           ))}
         </tbody>

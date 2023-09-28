@@ -1,4 +1,4 @@
-# CarCar
+# AutoHub
 
 This application is used for a car dealership to manage inventory, sales, and maintenance services for automobiles.
 
